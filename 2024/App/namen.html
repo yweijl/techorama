@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voeg je naam toe</title>
+    <link rel="stylesheet" href="game.css">
+    <style>
+        body {
+            font-family: 'Anderson Four Feather Falls', sans-serif;
+            margin: 20px;
+            background-image: url('assets/namen.png');
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+            color: #005452;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        .success {
+            color: green;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        button {
+            font-family: 'Anderson Four Feather Falls', sans-serif;
+            color: #005452;
+            font-size: 15px;
+            border-radius: 10px;
+            background-color: azure;
+        }
+
+        input[type="text"] {
+            font-family: 'Anderson Four Feather Falls', sans-serif;
+            height: 30px;
+            width: 100%;
+            max-width: 150px;
+            border-radius: 20px;
+            border-color: #005452;
+            border-width: 5px;
+            font-size: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            color: #005452;
+        }
+
+        @media (max-width: 600px) {
+            input[type="text"] {
+                height: 50px;
+                /* Adjust height for smaller screens */
+                font-size: 20px;
+                /* Adjust font size for smaller screens */
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Voer je naam in</h1>
+        <form id="nameForm">
+            <input type="text" id="name" name="name" required>
+            <button type="submit">Submit</button>
+        </form>
+        <p class="error"></p>
+        <p class="success"></p>
+        <script>
+            document.getElementById('nameForm').addEventListener('submit', async function (event) {
+                event.preventDefault();
+                const name = document.getElementById('name').value;
+
+                try {
+                    const response = await fetch('http://localhost:7129/api/deelnemers', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: document.getElementById('name').value
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Deelnemer niet toegevoegd');
+                    }
+
+                    if (await response.text() === 'Conflict') {
+                        throw new Error('Deelnemer bestaat al');
+                    }
+
+                    document.querySelector('.success').innerText = 'Naam toegevoegd!';
+                    document.querySelector('.error').innerText = '';
+                    runConfetti();
+                } catch (error) {
+                    document.querySelector('.error').innerText = error.message;
+                    document.querySelector('.success').innerText = '';
+                }
+                document.getElementById('nameForm').reset();
+            });
+
+            function runConfetti() {
+                confetti();
+            }
+        </script>
+    </div>
+</body>
+
+</html>

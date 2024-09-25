@@ -1,0 +1,107 @@
+@font-face {
+    font-family: 'Anderson Four Feather Falls';
+    src: url('assets/Anderson\ Four\ Feather\ Falls.ttf') format('truetype');
+}
+
+#confetti {
+    display: none;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('assets/game.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: black;
+}   
+
+#button {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 15vw;
+    height: 15vw;
+    padding-top: 1vw;
+    padding-bottom: 0.7vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    font-size: 1.8vw;
+    color: rgb(47, 12, 39);
+    border: 0.40vw solid #7e3875;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'anderson four feather falls', sans-serif;
+    transform: translate(-50%, -125%);
+    background: #e963b4;
+    box-shadow: 0 0 2vw rgba(0, 0, 0, 2), /* Even shadow all around */
+                inset 0 0.5vw 1vw rgba(255, 255, 255, 0.5), /* Inner top light */
+                inset 0 -0.5vw 1vw rgba(0, 0, 0, 1); /* Inner bottom shadow */
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+#button:active {
+    box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.5),
+                inset 0 0.5vw 1vw rgba(255, 255, 255, 0.2), /* Inner top light */
+                inset 0 -0.5vw 1vw rgba(0, 0, 0, 0.5); /* Inner bottom shadow */
+    transform: translate(-50%, -120%) scale(0.98);
+}
+
+#textBox {
+    position: fixed;
+    top: 52%;
+    left: 50%;
+    min-width: 15vw;
+    min-height: 7vw;
+    font-size: 4vw;
+    transform: translateX(-50%);
+    font-family: 'Anderson Four Feather Falls', sans-serif;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    color: #005452;
+    border: 0.45vw solid #005452;
+    background-color: white;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+@keyframes blink {
+    0%, 100% { color: transparent; }
+    50% { color: gold; }
+}
+
+.final-name {
+    animation: blink 1s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: translate(-50%, -125%) rotate(0deg); /* Starting position */
+    }
+    25% {
+        transform: translate(-90%, -100%) rotate(180deg); /* Mid-point - reaches the 'to' state */
+    }
+    50% {
+        transform: translate(-20%, -100%) rotate(360deg); /* Mid-point - reaches the 'to' state */
+    }
+    100% {
+        transform: translate(-50%, -125%) rotate(720deg); /* End position - returns to the 'from' state with an additional rotation */
+    }
+}
+
+.rotate {
+    animation: rotate calc(var(--animation-duration) / var(--animation-divisor)) linear infinite;
+    transform-origin: center center;
+    --animation-duration: 5s;
+    --animation-divisor: 1;
+}
