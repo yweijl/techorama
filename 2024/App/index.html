@@ -25,7 +25,7 @@
 			let names = [];
 
 			try {
-				const response = await fetch('http://localhost:7129/api/deelnemers', {
+				const response = await fetch('/api/deelnemers', {
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json'
@@ -86,7 +86,7 @@
 
 				let winner;
 				try {
-					const response = await fetch('http://localhost:7129/api/draw', {
+					const response = await fetch('/api/draw', {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json'

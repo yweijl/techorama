@@ -31,7 +31,7 @@ namespace Api
 
         private TableClient GetTableClient(string table)
         {
-            return new TableClient("", table);
+            return new TableClient(_connectionString, table);
         }
 
         [Function("resetdeelnemers")]

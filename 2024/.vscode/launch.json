@@ -15,6 +15,12 @@
             "request": "launch",
             "name": "Open namen.html",
             "file": "c:\\repo\\techorama\\2024\\App\\namen.html"
+        },
+        {
+            "name": "Attach to .NET Functions",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:azureFunctions.pickProcess}"
         }
     ]
 }
