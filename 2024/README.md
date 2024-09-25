@@ -21,6 +21,11 @@ To run this project, you need to have the following tools installed:
 3. **Install Azure Static Web Apps CLI (SWA CLI):**
    `npm install -g @azure/static-web-apps-cli`
 
-## Run the App 
+## Run the App locally 
 
  - from /2024 run `swa start .\App\  api --api-location .\Api\`
+
+## Deploying the app
+ - Make sure the connectionstring is set for the storage:
+ `az staticwebapp appsettings set --name <YOUR_APP_ID> --setting-names "connectionString=<KEY>"`
+
